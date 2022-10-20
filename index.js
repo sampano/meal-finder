@@ -2,10 +2,13 @@ const searchBtn = document.getElementById("search-btn");
 const mealList = document.getElementById("meal");
 const mealDetailsContent = document.querySelector(".meal-details-content");
 const recipeCloseBtn = document.getElementById("recipe-close-btn");
-
+const mealFeature = document.getElementById("feature-meal");
+const mealFeaturedDiv = document.querySelector(".feature-meal-result");
+const searchResultH2 = document.querySelector(".meal-result-title");
 //event listner
 searchBtn.addEventListener("click", getMealList);
 mealList.addEventListener("click", getMealRecipe);
+mealFeature.addEventListener("click", getMealRecipe);
 recipeCloseBtn.addEventListener("click", () => {
   mealDetailsContent.parentElement.classList.remove("showRecipe");
 });
@@ -18,6 +21,7 @@ async function getMealList() {
   );
   const data = await response.json();
   console.log(data);
+  searchResultH2.innerHTML = "Your Search Results";
 
   let html = "";
   if (data.meals) {
@@ -41,6 +45,8 @@ async function getMealList() {
   }
 
   mealList.innerHTML = html;
+  searchResultH2.innerHTML = "Your Search Results:";
+  mealFeaturedDiv.remove();
 }
 
 // get recipe of the meal
@@ -78,4 +84,65 @@ const mealRecipeModal = (meal) => {
     `;
   mealDetailsContent.innerHTML = html;
   mealDetailsContent.parentElement.classList.add("showRecipe");
+};
+
+const getRandIngredients = async () => {
+  const response = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
+  );
+  const data = await response.json();
+  const randNum = Math.floor(Math.random() * data.meals.length);
+  const ingridient = await data.meals[randNum].strIngredient;
+  featureMeals(ingridient);
+};
+getRandIngredients();
+
+// const featureMeals = async (ingredient) => {
+//   console.log(
+//     `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+//   );
+//   const trimedIngredient = ingredient.trim();
+//   const response = await fetch(
+//     `http://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast,garlic,salt`
+//   );
+//   const data = await response.json();
+//   console.log(ingredient.idMeal);
+//   let html = `
+//   <div class="feature-meal-item" data-id = "${ingredient.idMeal}">
+//               <div class="feature-meal-img">
+//                 <img src="${ingredient.strMealThumb}" alt="" alt="food" />
+//               </div>
+//               <div class="feature-meal-name">
+//                 <h3>${ingredient.strMeal}</h3>
+//                 <a href="#" class="feature-recipe-btn">Get Recipe</a>
+//               </div>`;
+//   mealFeature.innerHTML = html;
+// };
+
+const featureMeals = async (ingredient) => {
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+  );
+  const data = await response.json();
+  console.log(data.meals);
+  let html = "";
+  if (data.meals) {
+    data.meals.forEach((meal) => {
+      html += `
+                    <div class = "feature-meal-item" data-id = "${meal.idMeal}">
+                        <div class = "feature-meal-img">
+                            <img src = "${meal.strMealThumb}" alt = "food">
+                        </div>
+                        <div class = "feature-meal">
+                            <h3>${meal.strMeal}</h3>
+                            <a href = "#" class = "recipe-btn">Get Recipe</a>
+                        </div>
+                    </div>
+                `;
+    });
+  } else {
+    html = "Sorry, we didn't find any meal!";
+    mealFeature.classList.add("notFound-featured");
+  }
+  mealFeature.innerHTML = html;
 };

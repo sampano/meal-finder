@@ -13,25 +13,20 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <title>Meal Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Recipe Finder</title>
   </head>
   <body>
     <div class="container">
       <div class="meal-wrapper">
         <div class="meal-search">
-          <h2 class="title">Meal Finder</h2>
-          <blockquote>
-            Real food doesn't have ingredients, real food is ingredients.
-          </blockquote>
-          <cite>Jamie Oliver</cite>
+          <h2 class="title">Recipe Finder</h2>
+          <blockquote>A recipe has no soul. You, as the cook, must bring soul to the recipe.</blockquote>
+          <small>Thomas Keller</small>
 
-          <div class="meal-search-box">
+            <div class="meal-search-box">
             <input
               type="text"
               class="search-control"
@@ -43,10 +38,26 @@
             </button>
           </div>
         </div>
+          <div class="feature-meal-result">
+          <h2 class="title">Featured Recipe For Today:</h2>
+          <div id="feature-meal">
+            <!---- feature meal item---->
+            <!-- <div class="feature-meal-item">
+              <div class="feature-meal-img">
+                <img src="food.jpg" alt="" alt="food" />
+              </div>
+              <div class="feature-meal-name">
+                <h3>Potato Chips</h3>
+                <a href="#" class="feature-recipe-btn">Get Recipe</a>
+              </div> -->
+              <!-- end of feature meal item -->
+            </div>
+          </div>
+
         <div class="meal-result">
-          <h2 class="title">Your Search Results</h2>
+          <h2 class="title meal-result-title"></h2>
           <div id="meal">
-            <!---- meal item---->
+            <!-- -- meal item---->
             <!-- <div class="meal-item">
               <div class="meal-img">
                 <img src="food.jpg" alt="" alt="food" />
@@ -55,9 +66,10 @@
                 <h3>Potato Chips</h3>
                 <a href="#" class="recipe-btn">Get Recipe</a>
               </div> -->
-              <!-- end of meal item -->
-            </div>
+            <!-- end of meal item -->
           </div>
+          </div>
+        
         </div>
         <div class="meal-details">
           <!-- recipe close btn -->
@@ -71,7 +83,7 @@
 
           <!-- meal content -->
           <div class="meal-details-content">
-            <h2 class="recipe-title">Meals Name here</h2>
+            <!-- <h2 class="recipe-title">Meals Name here</h2>
             <p class="recipe-category">Category Name</p>
             <div class="recipe-instruct">
               <h3>Instructions</h3>
@@ -92,7 +104,7 @@
             </div>
             <div class="recipe-link">
               <a href="#" target="_blank">Watch Video</a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
